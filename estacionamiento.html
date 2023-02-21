@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<body style="background-image:url('https://img.freepik.com/vector-gratis/ilustracion-cruce-caminos-urbanos-semaforos-paso-peatones_212889-4626.jpg?w=740');background-size:cover;background-repeat:no-repeat;"></body>
+<head>
+	<!-- Diseño del HTML utilizando Bootstrap -->
+	<meta charset="utf-8">
+	<title>servidor conteo</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<style media="screen">
+	html, body{
+		height: 100%;
+	}
+	body{
+		display: flex; 
+		align-items: center;
+		background: #DC143C;
+	}
+	.container{
+		background-color: khaki;
+		height: 50vh;
+		margin: 5%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	</style>
+	
+</head>
+<body>
+	<h1>DETECTOR DE PERSONAS</h1>
+	
+	<div class="container">
+		
+		<div class="row justify-content-center align-self-center">
+			<div class="card">
+				<div class="card header">
+					Valores obtenidos por el sensor
+				</div>
+				<h2 id="aceleracion" class ="display-3 p-4"></h2> 
+			</div>
+		</div>
+	</div>
+	<!-- Se agrega la ruta para la biblioteca de socket.io versión 4.5.1 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" charset="utf-8"></script>
+	<script>
+		
+		<!-- Para la conexión se agrega la IP de la Rasp y el puerto utilizado -->
+	var socket = io('http://192.168.1.66:8080');;
+	 
+	
+	socket.on('acel', function(data){
+		
+		console.log(data);
+		let acel = document.getElementById('aceleracion');
+		acel.innerHTML = data;
+});
+
+	</script>
+</body>
+</html>
